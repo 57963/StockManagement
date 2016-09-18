@@ -1,0 +1,10 @@
+body{
+    background-color: rgb(185, 80, 102);
+}
+
+#sketch{
+    margin-left:500px;
+    background-color: aqua;
+    width:100px;
+    height:100px;
+}
