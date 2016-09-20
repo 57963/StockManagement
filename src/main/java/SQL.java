@@ -3,8 +3,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-class SQL {
-    private Connection connection;
+public class SQL {
+    Connection connection;
+    ResultSet rs;
     SQL(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -20,7 +21,8 @@ class SQL {
             for(int i = 0; i< data.length;i++){
                 statement.setString(i+1, data[i]);
             }
-            return statement.executeQuery();
+            rs = statement.executeQuery();
+            return rs;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,6 +31,7 @@ class SQL {
 
     void close(){
         try {
+            rs.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
