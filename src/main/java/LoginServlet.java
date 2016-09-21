@@ -12,12 +12,19 @@ public class LoginServlet extends HttpServlet{
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         SQL sql = new SQL();
         try {
-            ResultSet rs = sql.query("SELECT password=password(?), location*(password=password(?))" +
-                    " from stock_management.users where username=?;",httpServletRequest.getParameter("password"),httpServletRequest.getParameter("password"),httpServletRequest.getParameter("username"));
-            if (rs.next() && rs.getBoolean(1)){
+            ResultSet userRs = sql.query("SELECT userID, location, firstName, surname, rights FROM stock_management.users " +
+                    "WHERE username = ? AND password = PASSWORD(?);",httpServletRequest.getParameter("username"),httpServletRequest.getParameter("password"));
+            if (userRs.next()){
+                ResultSet locationRs = sql.query("SELECT locationID, name, type FROM stock_management.locations WHERE locationID=?",userRs.getInt("location")+"");
+                locationRs.next();
+                Location location = new Location(locationRs.getInt("locationID"),locationRs.getString("name"), locationRs.getInt("locationID")==1? Location.LocationType.HeadOffice: Location.LocationType.Store);
                 httpServletRequest.getSession().setAttribute("loggedIn",true);
-                httpServletRequest.getSession().setAttribute("location",rs.getInt(2));
-
+                httpServletRequest.getSession().setAttribute("user",new User(userRs.getInt("userID"),userRs.getString("firstName"),userRs.getString("surname"),userRs.getInt("rights")==1? User.Rights.Admin: User.Rights.User,location));
+                if(userRs.getInt("location") == 1){
+                    httpServletResponse.sendRedirect("/hohome");
+                } else {
+                    httpServletResponse.sendRedirect("/storehome");
+                }
             }else{
                 httpServletRequest.getSession().setAttribute("loggedIn",false);
                 httpServletResponse.sendRedirect("");

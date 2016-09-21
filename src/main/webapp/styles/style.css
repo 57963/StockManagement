@@ -13,31 +13,32 @@ header{
     text-align: right;
 }
 
-#loginBar{
-    height: 50px;
+#userBar{
+    padding: 10px;
+    height: 30px;
     border-bottom-color: black;
     border-width: 0;
     border-bottom-width: 1px;
     border-style: solid;
+    font-size: 20px;
+}
 
+#userBar p{
+    margin:0;
+    display: inline-block;
 }
 
 #login{
-
     margin: 0;
-    padding: 10px;
+    height: 30px;
 }
 
-#loginBar input{
+#userBar input{
     font-family: 'Work Sans', sans-serif;
     border-style:none;
     height:30px;
-
 }
 
-#sketch{
-    margin-left:500px;
-    background-color: aqua;
-    width:100px;
-    height:100px;
+#content{
+    padding:10px;
 }

@@ -9,6 +9,6 @@ import java.io.IOException;
 public class StoreHomeServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-
+        httpServletRequest.getRequestDispatcher("/WEB-INF/views/storehome.jsp").forward(httpServletRequest,httpServletResponse);
     }
 }
