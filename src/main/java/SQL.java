@@ -29,6 +29,14 @@ public class SQL {
         return null;
     }
 
+    void update(String update){
+        try{
+            connection.createStatement().executeUpdate(update);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     void close(){
         try {
             rs.close();

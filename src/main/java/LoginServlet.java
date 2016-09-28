@@ -15,7 +15,7 @@ public class LoginServlet extends HttpServlet{
             ResultSet userRs = sql.query("SELECT userID, location, firstName, surname, rights FROM stock_management.users " +
                     "WHERE username = ? AND password = PASSWORD(?);",httpServletRequest.getParameter("username"),httpServletRequest.getParameter("password"));
             if (userRs.next()){
-                ResultSet locationRs = sql.query("SELECT locationID, name, type FROM stock_management.locations WHERE locationID=?",userRs.getInt("location")+"");
+                ResultSet locationRs = sql.query("SELECT * FROM stock_management.locations WHERE locationID=?",userRs.getInt("location")+"");
                 locationRs.next();
                 Location location = new Location(locationRs.getInt("locationID"),locationRs.getString("name"), locationRs.getInt("locationID")==1? Location.LocationType.HeadOffice: Location.LocationType.Store);
                 httpServletRequest.getSession().setAttribute("loggedIn",true);
@@ -27,10 +27,13 @@ public class LoginServlet extends HttpServlet{
                 }
             }else{
                 httpServletRequest.getSession().setAttribute("loggedIn",false);
+                httpServletRequest.getSession().setAttribute("error", "Incorrect login details.");
                 httpServletResponse.sendRedirect("");
             }
         } catch (Exception e){
             e.printStackTrace();
+            httpServletRequest.getSession().setAttribute("error", "Database error.");
+            httpServletResponse.sendRedirect("");
             httpServletRequest.getSession().setAttribute("loggedIn",false);
         }
         sql.close();

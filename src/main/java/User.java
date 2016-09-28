@@ -21,4 +21,5 @@ public class User {
     public String getFirstName() {return firstName;}
     public Rights getRights(){return rights;}
     public Location getLocation() {return location;}
+    public String getFullName(){ return firstName + " " + surname;}
 }

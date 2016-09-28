@@ -3,25 +3,17 @@
 <html>
 <head>
     <title>Welcome</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
-
-    <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/scripts/sketch.js"></script>
-    <script>
-        function draw() {
-            //fdraw(${r},${g},${b});
-        }
-    </script>
-    <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/lib/p5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
 </head>
 <body>
 <%@ include file="../fragments/header.jspf"%>
 <div id="userBar">
-    <form id="login" action="/login" method="post">
+    <form action="/login" method="post">
         <input id="username" type="text" name="username" placeholder="Username">
         <input id="password" type="password" name="password" placeholder="Password">
         <input id="submit" type="submit" value="Login">
     </form>
+    <span style="font-size: medium; color: red;">${error}</span>
 </div>
-${location}
 </body>
 </html>

@@ -1,8 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="userBar">
-    <p>${user.firstName} ${user.surname} - ${user.rights.toString()} - ${user.location.name}</p>
-    <form >
-
+    ${user.firstName} ${user.surname} - ${user.rights.toString()} - ${user.location.name}
+    <form action="/logout" method="post">
+        <input id="submit" type="submit" value="Logout">
     </form>
-    <p style="float:right;">${user.location.locationType.toString().equals('HeadOffice')?"Head Office":"Store"}  Home</p>
+    <p style="float:right;">${user.location.locationType.toString()}  Home</p>
 </div>
