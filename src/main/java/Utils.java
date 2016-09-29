@@ -15,6 +15,7 @@ class Utils {
         } catch (Exception e){
             e.printStackTrace();
         }
+        session.setAttribute("locations",locations);
         rs = sql.query("SELECT userID, location, firstName, surname, rights FROM stock_management.users");
         ArrayList<User> users = new ArrayList<>();
         try {
@@ -24,6 +25,7 @@ class Utils {
         }catch (Exception e){
             e.printStackTrace();
         }
+        session.setAttribute("users",users);
         for(Location l: locations){
             for(User u:users){
                 if(u.getLocation()==l){
@@ -48,11 +50,27 @@ class Utils {
             }
         }
         session.setAttribute("sales",sales);
-        session.setAttribute("users",users);
-        session.setAttribute("locations",locations);
+        session.setAttribute("user",getUserFromID((int)session.getAttribute("userID"),session));
         for(int i = 1; i< 53 ;i++){
             //sql.update("insert into stock_management.sales(week, year, location, stock, quantity, net) VALUES ("+i+",2016,1,1,1,"+((Math.sin(i/4f)*100f)+200)+")");
         }
         sql.close();
+    }
+
+    static User getUserFromID(int ID,HttpSession session){
+        for(User u: (ArrayList<User>)session.getAttribute("users")){
+            if(u.getID()==ID){
+                return u;
+            }
+        }
+        return null;
+    }
+    static Location getLocationFromID(int ID,HttpSession session){
+        for(Location l: (ArrayList<Location>)session.getAttribute("locations")){
+            if(l.getID()==ID){
+                return l;
+            }
+        }
+        return null;
     }
 }

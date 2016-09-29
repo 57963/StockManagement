@@ -1,0 +1,20 @@
+<script src="/scripts/navBar.js"></script>
+<nav id="navBar">
+    <span onclick="toggleNav();">&#9776;</span>
+    <ul>
+        <li onclick="toggleSublist('locationsSublist', ${locations.size()*21})">Locations</li>
+        <ul class="sublist"  id="locationsSublist" >
+            <c:forEach items="${locations}" var="location">
+                <li>${location.name}</li>
+            </c:forEach>
+        </ul>
+        <li onclick="toggleSublist('usersSublist', ${(users.size()+1)*21})">Staff</li>
+        <ul class="sublist" id="usersSublist" >
+            <a href="/users"><li>All</li></a>
+            <c:forEach items="${users}" var="user">
+                <li>${user.fullName}</li>
+            </c:forEach>
+        </ul>
+        <li>Stock</li>
+    </ul>
+</nav>

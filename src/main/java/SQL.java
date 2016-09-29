@@ -29,9 +29,13 @@ public class SQL {
         return null;
     }
 
-    void update(String update){
-        try{
-            connection.createStatement().executeUpdate(update);
+    void update(String update, String... data){
+        try {
+            PreparedStatement statement = connection.prepareStatement(update);
+            for(int i = 0; i< data.length;i++){
+                statement.setString(i+1, data[i]);
+            }
+            statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,7 +43,9 @@ public class SQL {
 
     void close(){
         try {
-            rs.close();
+            if(rs != null) {
+                rs.close();
+            }
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();

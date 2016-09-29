@@ -5,6 +5,11 @@ body{
     font-family: 'Work Sans', sans-serif;
 }
 
+a{
+    color:inherit;
+    text-decoration: inherit;
+}
+
 header{
     background-color: rgb(59, 62, 67);
     color: rgb(255, 255, 255);
@@ -39,9 +44,13 @@ header h1{
 }
 
 #userBar input{
-    font-family: 'Work Sans', sans-serif;
     border-style:none;
     height:30px;
+}
+
+#addUser input[type="submit"]{
+    border-style:none;
+    height:21px;
 }
 
 #content{
@@ -71,8 +80,38 @@ header h1{
     transition: 1s;
 }
 
-#profitGraph{
+#profitGraph {
     width: 100%;
     height: 500px;
-    background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
+}
+
+.filterInput{
+    width:100%;
+}
+
+#search input[type="submit"]{
+    border-style:none;
+    height:21px;
+}
+
+#search form{
+    width:21px;
+    margin:0;
+}
+
+#addUser{
+    padding: 10px;
+    background-color: rgb(59,62,67);
+    width:200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#addUser input{
+    width:100%;
+}
+
+select, input{
+    font-family: 'Work Sans', sans-serif;
 }
