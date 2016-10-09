@@ -86,10 +86,6 @@ header h1{
     background-color: rgb(255, 255, 255);
 }
 
-.filterInput{
-    width:100%;
-}
-
 #search input[type="submit"]{
     border-style:none;
     height:21px;
@@ -101,14 +97,14 @@ header h1{
 }
 
 #addUser{
-    padding: 10px;
-    background-color: rgb(59,62,67);
+    padding: 5px;
+    background-color: rgb(238,238,238);
     width:200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-#addUser input{
+#addUser input, .filterInput, #changePassword input{
     width:100%;
 }
 

@@ -10,12 +10,11 @@ import java.sql.ResultSet;
 public class LoginServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        SQL sql = new SQL();
         try {
-            ResultSet userRs = sql.query("SELECT userID, location, firstName, surname, rights FROM stock_management.users " +
+            ResultSet userRs = SQL.query("SELECT userID, location, firstName, surname, rights FROM stock_management.users " +
                     "WHERE username = ? AND password = PASSWORD(?);",httpServletRequest.getParameter("username"),httpServletRequest.getParameter("password"));
             if (userRs.next()){
-                ResultSet locationRs = sql.query("SELECT * FROM stock_management.locations WHERE locationID=?",userRs.getInt("location")+"");
+                ResultSet locationRs = SQL.query("SELECT * FROM stock_management.locations WHERE locationID=?",userRs.getInt("location")+"");
                 locationRs.next();
                 Location location = new Location(locationRs.getInt("locationID"),locationRs.getString("name"), locationRs.getInt("locationID")==1? Location.LocationType.HeadOffice: Location.LocationType.Store);
                 httpServletRequest.getSession().setAttribute("loggedIn",true);
@@ -32,6 +31,5 @@ public class LoginServlet extends HttpServlet{
             httpServletResponse.sendRedirect("");
             httpServletRequest.getSession().setAttribute("loggedIn",false);
         }
-        sql.close();
     }
 }

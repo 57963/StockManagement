@@ -17,9 +17,7 @@ public class AddUserServlet extends HttpServlet{
                 location=l;
             }
         }
-        SQL sql = new SQL();
-        sql.update("INSERT INTO stock_management.users (username,password,location,firstName,surname,rights) VALUES (?,PASSWORD(?),?,?,?,?);",username,username,location.getID()+"",httpServletRequest.getParameter("firstName"),httpServletRequest.getParameter("surname"),(httpServletRequest.getParameter("rights").equals("Admin")?1:0)+"");
-        sql.close();
+        SQL.update("INSERT INTO stock_management.users (userID,username,password,location,firstName,surname,rights) VALUES (?,?,PASSWORD(?),?,?,?,?);",Utils.nextID()+"",username,username,location.getID()+"",httpServletRequest.getParameter("firstName"),httpServletRequest.getParameter("surname"),(httpServletRequest.getParameter("rights").equals("Admin")?1:0)+"");
         httpServletResponse.sendRedirect("/users");
     }
 }

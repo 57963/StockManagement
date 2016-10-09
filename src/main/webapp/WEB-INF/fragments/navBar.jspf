@@ -1,5 +1,5 @@
 <script src="/scripts/navBar.js"></script>
-<nav id="navBar">
+<nav id="navBar" >
     <span onclick="toggleNav();">&#9776;</span>
     <ul>
         <li onclick="toggleSublist('locationsSublist', ${locations.size()*21})">Locations</li>
@@ -16,5 +16,14 @@
             </c:forEach>
         </ul>
         <li>Stock</li>
+        <li onclick="toggleSublist('changePassword',82)">Password</li>
+        <div class="sublist" id="changePassword" >
+            <form style="float: right; width:150px; margin: 0" action="/changePassword" method="post">
+                <input type="password" name="currentPassword" placeholder="Current Password">
+                <input type="password" name="newPassword1" placeholder="New Password">
+                <input type="password" name="newPassword2" placeholder="Repeat New Password">
+                <input style="border-style: none; height:19px;" type="submit" value="Change">
+            </form>
+        </div>
     </ul>
 </nav>
